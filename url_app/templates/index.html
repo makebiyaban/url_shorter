@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% block content %}
+    <h2>wellcome to your site,goodluck {{user.username}}</h2>
+    {% for post in posts %}
+        <div>{{post.author.username}} say: {{post.body}}</div>
+    {% endfor %}
+  {% endblock %}

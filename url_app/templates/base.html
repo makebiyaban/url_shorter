@@ -1,0 +1,20 @@
+<!doctype html>
+
+    <html>
+    <head>
+    
+    {% if title %}
+      <title>{{title}}</title>
+    {% else %}
+      <title>home page</title>
+    {% endif %}
+    </head>
+    <body>
+    <div>
+    url shortet : <a href="/">home</a><a href="/login">sign in</a>
+    </div>
+    <hr>
+    
+    {% block content %} {% endblock %}
+      </body>
+    </html>
