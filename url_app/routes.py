@@ -23,8 +23,8 @@ def index():
     
 @app1.route('/login', methods=['GET','POST'])
 def login():
-	form = LoginForm()
+    form = LoginForm()
     if form.validate_on_submit():
         flash('login requested for user {}, remmber_me={}'.format(form.username.data, form.remmber_me.data))
         return redirect('/')
-	return render_template('login.html',title='sign in',form=form)
+    return render_template('login.html',title='sign in',form=form)
