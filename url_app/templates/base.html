@@ -11,9 +11,23 @@
     </head>
     <body>
     <div>
-    url shortet : <a href="/">home</a><a href="/login">sign in</a>
+    url shortet : 
+    <a href="{{ url_for('index')}}">home</a>
+    <a href="{{ url_for('login') }}">sign in</a>
     </div>
     <hr>
+
+    <div>
+      {% with messages = get_flashed_messages() %}
+      {% if messagees %}
+      <ul>
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+      {% endwith %}
+    </div>
     
     {% block content %} {% endblock %}
       </body>

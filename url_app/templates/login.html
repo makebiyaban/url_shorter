@@ -6,9 +6,15 @@
     {{ form.hidden_tag() }}
 <p>
 {{ form.username.lable }} : {{ form.username(size=32)}}
+{% for error in form.username.errors %}
+    <span style="color: red;">[{{ error }}]</span>
+{% endfor %}
 </p>
 <p>
 {{ form.password.lable }} <br> {{ form.password(size=32) }}
+{% for error in form.password.errors %}
+    <span style="color: red;">[{{ error }}]</span>
+{% endfor %}
 <br>
 <p> {{ form.remmber_me.lable }} {{ form.remmber_me() }} </p>
 <p> {{ form.submit() }} </p>
