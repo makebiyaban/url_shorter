@@ -1,4 +1,6 @@
-from flask import render_template
+from lzma import FORMAT_AUTO
+from flask import render_template, flash, redirect
+from prompt_toolkit import formatted_text
 from url_app import app1
 from url_app.forms import LoginForm
 
@@ -19,7 +21,10 @@ def index():
     ]
     return render_template('index.html',title='home page',user=user,posts=posts)
     
-@app1.route('/login')
+@app1.route('/login', methods=['GET','POST'])
 def login():
-	form=LoginForm()
+	form = LoginForm()
+    if form.validate_on_submit():
+        flash('login requested for user {}, remmber_me={}'.format(form.username.data, form.remmber_me.data))
+        return redirect('/')
 	return render_template('login.html',title='sign in',form=form)
