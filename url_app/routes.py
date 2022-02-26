@@ -1,4 +1,10 @@
+<<<<<<< HEAD
 from flask import render_template, flash, redirect
+=======
+from lzma import FORMAT_AUTO
+from flask import render_template, flash, redirect, url_for
+from prompt_toolkit import formatted_text
+>>>>>>> 94529f34b7babc289f3b78ab0f0474d6f044e0e8
 from url_app import app1
 from url_app.forms import LoginForm
 
@@ -24,5 +30,5 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         flash('login requested for user {}, remmber_me={}'.format(form.username.data, form.remmber_me.data))
-        return redirect('/')
+        return redirect(url_for('index'))
     return render_template('login.html',title='sign in',form=form)
