@@ -1,6 +1,4 @@
-from lzma import FORMAT_AUTO
 from flask import render_template, flash, redirect
-from prompt_toolkit import formatted_text
 from url_app import app1
 from url_app.forms import LoginForm
 
