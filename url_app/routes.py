@@ -1,10 +1,12 @@
 from flask import render_template, flash, redirect, url_for
 from url_app import app1
 from url_app.forms import LoginForm
-from flask_login import current_user, login_user
+from flask_login import current_user, login_user, login_required, logout_user
 from url_app.models import User
 
 @app1.route('/')
+@app1.route('/index')
+#@login_required
 def index():
     user={'username':'mohammad'}
     posts=[
@@ -24,14 +26,18 @@ def index():
 @app1.route('/login', methods=['GET','POST'])
 def login():
     form = LoginForm()
-    if current_user.authenticated:
-        return redirect(url_for('/'))
-    if form.validate_on_submit():    
-        username=form.username.data
-        user=User.query.filter_by(username).first()
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
+    if form.validate_on_submit():            
+        user=User.query.filter_by(username=form.username.data).first()
         if user is None or not user.check_password(form.password.data):
             flash('invalid username or password')
             return redirect(url_for('login'))
         login_user(user,remember=form.remmber_me.data)
-        return redirect(url_for('/'))
+        return redirect(url_for('index'))
     return render_template('login.html',title='sign in',form=form)
+
+@app1.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('index'))

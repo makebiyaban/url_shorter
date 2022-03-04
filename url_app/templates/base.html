@@ -13,8 +13,13 @@
     <div>
     url shortet : 
     <a href="{{ url_for('index')}}">home</a>
+    {% if current_user.is_anonymous %}
     <a href="{{ url_for('login') }}">sign in</a>
-    </div>
+    {% else %}
+    <a href="{{ url_for('logout') }}">sign out</a>
+    <span>welcom to you site {{current_user.username}} </span>
+    {% endif %}
+  </div>
     <hr>
 
     <div>

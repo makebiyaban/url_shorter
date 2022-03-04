@@ -7,6 +7,7 @@ import os
 
 app1=Flask(__name__)
 login=LoginManager(app1)
+login.login_view='login'
 app1.config.from_object(Config)
 db=SQLAlchemy(app1)
 migrate=Migrate(app1,db)

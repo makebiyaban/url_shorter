@@ -4,7 +4,7 @@ from xml.dom.pulldom import default_bufsize
 from url_app import db
 from werkzeug.security import generate_password_hash,check_password_hash
 from flask_login import UserMixin
-from app1 import login
+from url_app import login
 
 class User (UserMixin, db.Model):
     id=db.Column(db.Integer,primary_key=True)
