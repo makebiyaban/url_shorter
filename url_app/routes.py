@@ -1,6 +1,7 @@
+from crypt import methods
 from flask import render_template, flash, redirect, url_for
 from url_app import app1
-from url_app.forms import LoginForm
+from url_app.forms import LoginForm, RegisterForm
 from flask_login import current_user, login_user, login_required, logout_user
 from url_app.models import User
 
@@ -36,6 +37,11 @@ def login():
         login_user(user,remember=form.remmber_me.data)
         return redirect(url_for('index'))
     return render_template('login.html',title='sign in',form=form)
+
+@app1.route('/register',methods=['GET','POST'])
+def register():
+    form = RegisterForm()
+    return render_template('register.html',title='register new user',form=form)
 
 @app1.route('/logout')
 def logout():
