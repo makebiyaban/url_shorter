@@ -1,6 +1,7 @@
 from crypt import methods
+import email
 from flask import render_template, flash, redirect, url_for
-from url_app import app1
+from url_app import app1,db
 from url_app.forms import LoginForm, RegisterForm
 from flask_login import current_user, login_user, login_required, logout_user
 from url_app.models import User
@@ -41,6 +42,21 @@ def login():
 @app1.route('/register',methods=['GET','POST'])
 def register():
     form = RegisterForm()
+    if form.validate_on_submit():
+        name = form.name.data
+        family = form.family.data
+        birthday = form.birthday.data
+        mobile = form.mobile.data
+        website = form.website.data
+        username= form.username.data
+        email = form.email.data
+        password=form.password.data
+        user=User(name=name, family=family, birthday=birthday, mobile=mobile, website=website, username=username, email=email)
+        user.set_password(password)
+        db.session.add(user)
+        db.session.commit()
+        flash('tooo movafagh shodi')
+        return redirect(url_for('login'))        
     return render_template('register.html',title='register new user',form=form)
 
 @app1.route('/logout')
